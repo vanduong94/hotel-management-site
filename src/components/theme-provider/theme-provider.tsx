@@ -15,7 +15,7 @@ const ThemeProvider = ({children}: {
     setRenderComponent(true)
   }, [])
 
-  if (!renderComponent) return <></>
+  if (!renderComponent) return <h1>Loading</h1>
   
   return (
     <ThemeContext.Provider value={{ darkTheme, setDarkTheme }}>
