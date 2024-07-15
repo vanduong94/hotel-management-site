@@ -1,9 +1,13 @@
 'use client'
 
-import React from "react"
+import React, { useEffect } from "react"
 import { ChangeEvent, FormEvent, useState } from "react"
 import { AiFillGithub } from "react-icons/ai"
 import { FcGoogle } from "react-icons/fc"
+import { signUp } from 'next-auth-sanity/client';
+import { signIn, useSession } from 'next-auth/react';
+import toast from 'react-hot-toast';
+import { useRouter } from "next/navigation"
 
 const defaultFormData = {
   email: '',
@@ -14,19 +18,41 @@ const defaultFormData = {
 const Auth = () => {
   const [formData, setFormData] = useState(defaultFormData)
 
-  const inputStyles = "border border-gray-300 sm:text text-black rounded:lg block w-full p-2.5 focus:outline-none"
+  const inputStyles = "border border-gray-300 sm:text text-black rounded-lg block w-full p-2.5 focus:outline-none"
 
   const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target
     setFormData({ ...formData, [name]: value })
   }
 
+  const { data: session } = useSession()
+  const router = useRouter()
+
+  useEffect(() => {
+    if (session) router.push("/")
+  }, [router, session])
+
+  const loginHandler = async () => {
+    try {
+      await signIn()
+      // Redirect user to the homepage
+      router.push("/")
+    } catch (error) {
+      toast.error("Something went wrong")
+    }
+  }
+
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault()
 
     try {
+      const user = await signUp(formData);
+      if (user) {
+        toast.success("Sucess. Please sign in")
+      }
       console.log(formData);
     } catch (error) {
+      toast.error("Something went wrong")
       console.log(error);
     } finally {
       setFormData(defaultFormData)
@@ -42,8 +68,9 @@ const Auth = () => {
           </h1>
           <p>OR</p>
           <span className="inline-flex items-center">
-            <AiFillGithub className="mr-3 text-4xl cursor-pointer text-black dark:text-white" />
-            <FcGoogle className="ml-3 text-4xl cursor-pointer"/>
+            <AiFillGithub className="mr-3 text-4xl cursor-pointer text-black dark:text-white" onClick={loginHandler}/>
+            |
+            <FcGoogle className="ml-3 text-4xl cursor-pointer" onClick={loginHandler}/>
           </span>
         </div>
         <form action="" className="space-y-4 md:space-y-6" onSubmit={handleSubmit}>
@@ -54,7 +81,7 @@ const Auth = () => {
             Sign Up
           </button>
         </form>
-        <button className="text-blue-700 underline">login</button>
+        <button className="text-blue-700 underline" onClick={loginHandler}>login</button>
       </div>
     </section>
   )
