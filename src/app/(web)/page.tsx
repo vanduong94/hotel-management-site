@@ -1,8 +1,9 @@
+import HeroSection from "@/components/hero-section";
 
 const Home = () => {
   return (
     <>
-      Home
+      <HeroSection />
     </>
   );
 }
