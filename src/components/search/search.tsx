@@ -1,8 +1,35 @@
-import React from 'react'
+import { useRouter } from 'next/navigation';
+import React, { ChangeEvent, FC } from 'react'
 
-type Props = {}
+type Props = {
+  roomTypeFilter: string;
+  searchQuery: string;
+  setRoomTypeFilter: (value: string) => void;
+  setSearchQuery: (value: string) => void;
+}
 
-function Search({}: Props) {
+const Search: FC<Props> = ({ 
+  roomTypeFilter, 
+  searchQuery, 
+  setRoomTypeFilter, 
+  setSearchQuery 
+}) => {
+
+  const rounter = useRouter()
+
+  const handleRoomTypeChange = (event: ChangeEvent<HTMLSelectElement>) => {
+    setRoomTypeFilter(event.target.value)
+  }
+
+  const handleSearchQueryChange = (event: ChangeEvent<HTMLInputElement>) => {
+    setSearchQuery(event.target.value)
+  }
+
+  const handleFilterClick = () => {
+    // Navigate the user to the room page with the query
+    rounter.push(`/rooms?roomType=${roomTypeFilter}&searchQuery=${searchQuery}`)
+  }
+
   return (
     <section className="bg-tertiary-light px-4 py-6 rounded-lg">
       <div className="container mx:auto flex gap-4 flex-wrap justify-between items-center">
@@ -12,8 +39,8 @@ function Search({}: Props) {
           </label>
           <div className="relative">
             <select 
-              // value={rooTypeFilter}
-              // onChange={handleRoomTypeChange} 
+              value={roomTypeFilter}
+              onChange={handleRoomTypeChange} 
               className="w-full px-4 py-2 capitalize rounded leading-tight dark:bg-black focus:outline-none">
                 <option value="All">All</option>
                 <option value="Basic">Basic</option>
@@ -30,15 +57,15 @@ function Search({}: Props) {
             id="search" 
             placeholder="Search..." 
             className="w-full px-4 py-3 rounded leading-tight dark:bg-black focus:outline-none placeholder:text-black dark:placeholder:text-white"
-            // value={searchQuery}
-            // onChange={handleSearchQueryChange}
+            value={searchQuery}
+            onChange={handleSearchQueryChange}
           />
         </div>
 
         <button 
           className="btn-primary" 
           type="button"
-          // onClick={handleFilterClick}
+          onClick={handleFilterClick}
         >Search</button>
       </div>
     </section>
