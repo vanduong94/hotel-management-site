@@ -11,6 +11,6 @@ const Home = () => {
       {/* Newsletter */}
     </>
   );
-}
+};
 
-export default Home
+export default Home;

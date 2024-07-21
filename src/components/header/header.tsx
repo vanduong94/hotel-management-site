@@ -46,7 +46,7 @@ const Header = () => {
           </li>
           <li className="ml-2">
             {darkTheme ? (
-              <MdDarkMode 
+              <MdOutlineLightMode 
               className="cursor-pointer"
               onClick={() => {
                 setDarkTheme(false)
@@ -54,7 +54,7 @@ const Header = () => {
               }}
               />
             ) : 
-            <MdOutlineLightMode
+            <MdDarkMode
               className="cursor-pointer"
               onClick={() => {
               setDarkTheme(true)

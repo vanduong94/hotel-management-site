@@ -8,11 +8,11 @@ import ThemeProvider from "@/components/theme-provider";
 import NextAuthProvider from "@/components/auth-provider";
 import Toast from "@/components/toast";
 
-const poppins = Poppins({ 
-  subsets: ["latin"], 
-  weight: ["400", "500", "700", "900"], 
-  style: ["italic", "normal"], 
-  variable: "--font-poppins", 
+const poppins = Poppins({
+  subsets: ["latin"],
+  weight: ["400", "500", "700", "900"],
+  style: ["italic", "normal"],
+  variable: "--font-poppins",
 });
 
 export const metadata: Metadata = {
