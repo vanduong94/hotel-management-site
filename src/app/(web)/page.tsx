@@ -2,13 +2,17 @@ import HeroSection from "@/components/hero-section";
 import PageSearch from "@/components/page-search";
 import Gallery from "@/components/gallery";
 import NewsLetter from "@/components/news-letter";
+import FeatureRoom from "@/components/feature-room";
+import { getFeaturedRoom } from "@/lib/apis";
 
-const Home = () => {
+const Home = async () => {
+  const featuredRoom = await getFeaturedRoom();
+
   return (
     <>
       <HeroSection />
       <PageSearch />
-      {/* Feature room */}
+      <FeatureRoom featuredRoom={featuredRoom} />
       <Gallery />
       <NewsLetter />
     </>
