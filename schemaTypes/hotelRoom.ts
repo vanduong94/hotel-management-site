@@ -1,10 +1,10 @@
-import { defineField } from "sanity"
+import { defineField } from "sanity";
 
 const roomTypes = [
-  {title: "Basic", vlaue: "basic"},
-  {title: "Luxury", vlaue: "luxury"},
-  {title: "Suite", vlaue: "suite"}
-]
+  { title: "Basic", value: "basic" },
+  { title: "Luxury", value: "luxury" },
+  { title: "Suite", value: "suite" },
+];
 
 const hotelRoom = {
   name: "hotelRoom",
@@ -15,34 +15,37 @@ const hotelRoom = {
       name: "name",
       title: "Name",
       type: "string",
-      validation: Rule => Rule.required().max(50).error("Maximum 50 characters")
+      validation: (Rule) =>
+        Rule.required().max(50).error("Maximum 50 Characters"),
     }),
     defineField({
       name: "slug",
       type: "slug",
       options: {
-        source: "name"
+        source: "name",
       },
-      validation: Rule => Rule.required()
+      validation: (Rule) => Rule.required(),
     }),
     defineField({
       name: "description",
       title: "Description",
       type: "text",
-      validation: Rule => Rule.required().min(100).error("Minimum 100 characters")
+      validation: (Rule) =>
+        Rule.required().min(100).error("Minimum 100 Characters"),
     }),
     defineField({
       name: "price",
       title: "Price",
       type: "number",
-      validation: Rule => Rule.required().min(100).error("Minimum 100 USD")
+      validation: (Rule) =>
+        Rule.required().min(100).error("Minimum 100 Characters"),
     }),
     defineField({
       name: "discount",
       title: "Discount",
       type: "number",
       initialValue: 0,
-      validation: Rule => Rule.required().min(0)
+      validation: (Rule) => Rule.min(0),
     }),
     defineField({
       name: "images",
@@ -52,38 +55,23 @@ const hotelRoom = {
         {
           type: "object",
           fields: [
-            {
-              name: "url",
-              type: "url",
-              title: "URL"
-            },
-            {
-              name: "file",
-              type: "file",
-              title: "File"
-            },
-          ]
-        }
+            { name: "url", type: "url", title: "URL" },
+            { name: "file", type: "file", title: "File" },
+          ],
+        },
       ],
-      validation: Rule => Rule.required().min(3).error("Minimum of 3 images required")
+      validation: (Rule) =>
+        Rule.required().min(3).error("Minimum of 3 images required"),
     }),
     defineField({
       name: "coverImage",
       title: "Cover Image",
       type: "object",
       fields: [
-        {
-          name: "url",
-          type: "url",
-          title: "URL"
-        },
-        {
-          name: "file",
-          type: "file",
-          title: "File"
-        }
+        { name: "url", type: "url", title: "URL" },
+        { name: "file", type: "file", title: "File" },
       ],
-      validation: Rule => Rule.required().error("Cover Image is required")
+      validation: (Rule) => Rule.required().error("Cover Image is required"),
     }),
     defineField({
       name: "type",
@@ -92,15 +80,16 @@ const hotelRoom = {
       options: {
         list: roomTypes,
       },
+      validation: (Rule) => Rule.required(),
       initialValue: "basic",
-      validation: Rule => Rule.required()
     }),
     defineField({
       name: "specialNote",
       title: "Special Note",
       type: "text",
-      initialValue: "Check-in time is 12:00 PM, checkout time is 11:59 AM. If you don't leave behind any items, please contact the reception",
-      validation: Rule => Rule.required()
+      validation: (Rule) => Rule.required(),
+      initialValue:
+        "Check-in time is 12:00 PM, checkout time is 11:59 AM. If you leave behind any items, please contact the receptionist.",
     }),
     defineField({
       name: "dimension",
@@ -108,11 +97,11 @@ const hotelRoom = {
       type: "string",
     }),
     defineField({
-      name: "numberOfBed",
-      title: "Number Of Bed",
+      name: "numberOfBeds",
+      title: "Number Of Beds",
       type: "number",
+      validation: (Rule) => Rule.min(1),
       initialValue: 1,
-      validation: Rule => Rule.min(1)
     }),
     defineField({
       name: "offeredAmenities",
@@ -122,19 +111,11 @@ const hotelRoom = {
         {
           type: "object",
           fields: [
-            {
-              name: "icon",
-              title: "Icon",
-              type: "string"
-            },
-            {
-              name: "amenity",
-              title: "Amenity",
-              type: "string"
-            }
-          ]
-        }
-      ]
+            { name: "icon", title: "Icon", type: "string" },
+            { name: "amenity", title: "Amenity", type: "string" },
+          ],
+        },
+      ],
     }),
     defineField({
       name: "isBooked",
@@ -152,9 +133,9 @@ const hotelRoom = {
       name: "reviews",
       title: "Reviews",
       type: "array",
-      of: [{ type: "review" }]
+      of: [{ type: "review" }],
     }),
-  ]
-}
+  ],
+};
 
-export default hotelRoom
+export default hotelRoom;
