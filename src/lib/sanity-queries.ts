@@ -8,5 +8,6 @@ export const getFeaturedRoomQuery = groq`*[_type == "hotelRoom" && isFeatured ==
   isFeatured,
   name,
   price,
-  slug
+  slug,
+  coverImage
 }`;
