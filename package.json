@@ -19,7 +19,8 @@
     "react-hot-toast": "^2.4.1",
     "react-icon": "^1.0.0",
     "react-icons": "^5.2.1",
-    "sanity": "^3.50.0"
+    "sanity": "^3.50.0",
+    "swr": "^2.2.5"
   },
   "devDependencies": {
     "@types/node": "^20",
