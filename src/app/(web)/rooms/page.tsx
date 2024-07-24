@@ -6,9 +6,10 @@ import { useSearchParams } from "next/navigation";
 import React, { useEffect, useState } from "react";
 import useSWR from "swr";
 
-type Props = {};
+import Search from "@/components/search";
+import RoomCard from "@/components/room-card";
 
-function Rooms({}: Props) {
+const Rooms = () => {
   const [roomTypeFilter, setRoomTypeFilter] = useState("");
   const [searchQuery, setSearchQuery] = useState("");
   const searchParams = useSearchParams();
@@ -34,7 +35,6 @@ function Rooms({}: Props) {
   const filterRooms = (rooms: Room[]) => {
     return rooms.filter((room) => {
       // Apply room type filter
-
       if (
         roomTypeFilter &&
         roomTypeFilter.toLocaleLowerCase() !== "all" &&
@@ -48,16 +48,31 @@ function Rooms({}: Props) {
         searchQuery &&
         !room.name.toLocaleLowerCase().includes(searchQuery.toLocaleLowerCase())
       ) {
-        return false
+        return false;
       }
 
-      return true
+      return true;
     });
   };
 
-  const filteredRooms = filterRooms(data || [])
+  const filteredRooms = filterRooms(data || []);
 
-  return <div>Rooms</div>;
+  return (
+    <div className="container mx-auto pt-10">
+      <Search
+        roomTypeFilter={roomTypeFilter}
+        searchQuery={searchQuery}
+        setRoomTypeFilter={setRoomTypeFilter}
+        setSearchQuery={setSearchQuery}
+      />
+
+      <div className="flex mt-20 justify-between flex-wrap">
+        {filteredRooms.map((room) => (
+          <RoomCard key={room._id} room={room} />
+        ))}
+      </div>
+    </div>
+  );
 }
 
 export default Rooms;
