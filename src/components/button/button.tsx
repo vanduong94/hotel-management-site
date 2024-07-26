@@ -4,18 +4,21 @@ import Link from "next/link";
 type ButtonProps = {
   href?: string;
   isPrimary?: boolean;
+  className?: string;
   onClick?: () => void;
 } & ButtonHTMLAttributes<HTMLButtonElement> &
   AnchorHTMLAttributes<HTMLAnchorElement>;
 
-const Button: FC<ButtonProps> = ({ children, href, isPrimary }) => {
-  const mode = isPrimary ? "bg-primary" : "btn-tertiary";
+const Button: FC<ButtonProps> = ({ children, href, isPrimary, className, ...props }) => {
+  // const mode = isPrimary ? "btn-primary" : "btn-tertiary";
+  // const combinedClassName = `${mode} ${className || ''}`;
 
   if (href) {
     return (
       <Link
         href={href}
-        className={`${mode} inline-block text-center w-full py-4 rounded-xl text-white text-xl font-bold hover:-translate-y-2 hover:shadow-lg transition-all duration-500 uppercase`}
+        className={className}
+        {...props}
       >
         {children}
       </Link>
@@ -24,7 +27,8 @@ const Button: FC<ButtonProps> = ({ children, href, isPrimary }) => {
 
   return (
     <button
-      className={`${mode} inline-block text-center w-full py-4 rounded-xl text-white text-xl font-bold hover:-translate-y-2 hover:shadow-lg transition-all duration-500 uppercase`}
+      className={className}
+      {...props}
     >
       {children}
     </button>
