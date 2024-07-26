@@ -4,6 +4,7 @@ import Link from "next/link";
 type ButtonProps = {
   href?: string;
   isPrimary?: boolean;
+  onClick?: () => void;
 } & ButtonHTMLAttributes<HTMLButtonElement> &
   AnchorHTMLAttributes<HTMLAnchorElement>;
 
