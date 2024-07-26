@@ -1,6 +1,8 @@
 import { useRouter } from "next/navigation";
 import React, { ChangeEvent, FC } from "react";
 
+import Button from "../button";
+
 type Props = {
   roomTypeFilter: string;
   searchQuery: string;
@@ -63,13 +65,9 @@ const Search: FC<Props> = ({
           />
         </div>
 
-        <button
-          className="btn-primary"
-          type="button"
-          onClick={handleFilterClick}
-        >
-          Search
-        </button>
+        <Button isPrimary onClick={handleFilterClick} className="btn-primary" type="button">
+        Search
+        </Button>
       </div>
     </section>
   );
