@@ -1,12 +1,8 @@
-import { Room } from "@/models/room";
 import React, { FC } from "react";
 import Image from "next/image";
+import { RoomCardProps } from "./types";
 
 import Button from "../button";
-
-type RoomCardProps = {
-  room: Room;
-};
 
 const RoomCard: FC<RoomCardProps> = ({
   room: { coverImage, name, price, type, description, slug, isBooked },
