@@ -17,15 +17,7 @@ type Story = StoryObj<RoomCardProps>;
 export const Card: Story = {
   args: {
     room: {
-      _id: "13b171c3", 
-      dimension: 300, 
-      discount: 0, 
-      images: [],
       isBooked: false, 
-      isFeature: false, 
-      numberOfBeds: 2, 
-      offeredAmenities: [], 
-      specialNote: "",
       description: "Nam commodo suscipit quam. In consectetuer turpis ut velit. Fusce vel dui. Ut leo. Phasellus ullamcorper ipsum rutrum nunc.",
       slug: {
         current: "standard-room",
