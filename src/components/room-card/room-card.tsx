@@ -4,11 +4,11 @@ import Image from "next/image";
 
 import Button from "../button";
 
-type Props = {
+type RoomCardProps = {
   room: Room;
 };
 
-const RoomCard: FC<Props> = ({
+const RoomCard: FC<RoomCardProps> = ({
   room: { coverImage, name, price, type, description, slug, isBooked },
 }) => {
   return (
@@ -31,7 +31,10 @@ const RoomCard: FC<Props> = ({
 
         <p className="pt-2 text-xs">{type} Room</p>
         <p className="pt-3 pb-6">{description.slice(1, 100)}...</p>
-        <Button href={`/rooms/${slug.current}`} className="bg-primary inline-block text-center w-full py-4 rounded-xl text-white text-xl font-bold hover:-translate-y-2 hover:shadow-lg transition-all duration-500 uppercase">
+        <Button
+          href={`/rooms/${slug.current}`}
+          className="bg-primary inline-block text-center w-full py-4 rounded-xl text-white text-xl font-bold hover:-translate-y-2 hover:shadow-lg transition-all duration-500 uppercase"
+        >
           {isBooked ? "Booked" : "Book now"}
         </Button>
       </div>
