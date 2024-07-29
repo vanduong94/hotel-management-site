@@ -1,6 +1,6 @@
 "use client";
 
-import { getRoom } from "@/lib/apis";
+import { getRooms } from "@/lib/apis";
 import { Room } from "@/models/room";
 import { useSearchParams } from "next/navigation";
 import React, { useEffect, useState } from "react";
@@ -23,7 +23,7 @@ const Rooms = () => {
   }, []);
 
   async function fetchData() {
-    return getRoom();
+    return getRooms();
   }
 
   const { data, error, isLoading } = useSWR("get/hotelRooms", fetchData);
