@@ -12,7 +12,21 @@ export async function getFeaturedRoom() {
   return result;
 }
 
-export async function getRoom() {
-  const result = await sanityClient.fetch<Room[]>(queries.getRoomQuery);
+export async function getRooms() {
+  const result = await sanityClient.fetch<Room[]>(
+    queries.getRoomQuery,
+    {},
+    { cache: "no-cache" }
+  );
+  return result;
+}
+
+export async function getRoom(slug: string) {
+  const result = await sanityClient.fetch<Room>(
+    queries.getRoom,
+    { slug },
+    { cache: "no-cache" }
+  );
+
   return result;
 }
