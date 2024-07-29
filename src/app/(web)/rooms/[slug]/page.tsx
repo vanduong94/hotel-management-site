@@ -4,6 +4,7 @@ import { getRoom } from "@/lib/apis";
 import React from "react";
 import useSWR from "swr";
 import LoadingSpiner from "../../loading";
+import HotelPhotoGallery from "@/components/hotel-photo-gallery";
 
 type Props = {};
 
@@ -25,7 +26,11 @@ const RoomDetails = (props: { params: { slug: string } }) => {
   // console.log("Foobar");
   // console.log(room);
 
-  return <div>RoomDetails</div>;
+  return (
+    <div>
+      <HotelPhotoGallery photos={room.images}/>
+    </div>
+  );
 };
 
 export default RoomDetails;
