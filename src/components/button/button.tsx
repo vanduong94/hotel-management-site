@@ -21,6 +21,7 @@ const Button: FC<ButtonProps> = ({ children, href, buttonType, className, onClic
   return (
     <button
       className={buttonType}
+      onClick={onClick}
       {...props}
     >
       {children}
