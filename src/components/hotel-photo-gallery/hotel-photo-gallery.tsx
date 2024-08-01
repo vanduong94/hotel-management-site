@@ -1,10 +1,14 @@
 "use client";
 
 import React, { FC, useState } from "react";
-import { ImagePropType } from "@/models/room";
 import Image from "next/image";
+
+import { ImagePropType } from "@/models/room";
+
 import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
 import { MdCancel } from "react-icons/md";
+
+import { MAXIMUM_VISIBLE_PHOTOS } from "@/lib/constants";
 
 const HotelPhotoGallery: FC<{ photos: ImagePropType[] }> = ({ photos }) => {
   const [currentPhotoIndex, setCurrentPhotoIndex] = useState(0);
@@ -29,7 +33,7 @@ const HotelPhotoGallery: FC<{ photos: ImagePropType[] }> = ({ photos }) => {
     );
   };
 
-  const maximumVisiblePhotos = 4;
+  const maximumVisiblePhotos = MAXIMUM_VISIBLE_PHOTOS;
   const totalPhotos = photos.length;
   const displayPhotos = photos.slice(1, maximumVisiblePhotos - 1);
   const remainingPhotosCount = totalPhotos - maximumVisiblePhotos;
