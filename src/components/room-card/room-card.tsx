@@ -29,7 +29,7 @@ const RoomCard: FC<RoomCardProps> = ({
         <p className="pt-3 pb-6">{description.slice(1, 100)}...</p>
         <Button
           href={`/rooms/${slug.current}`}
-          className="bg-primary inline-block text-center w-full py-4 rounded-xl text-white text-xl font-bold hover:-translate-y-2 hover:shadow-lg transition-all duration-500 uppercase"
+          buttonType="btn-card"
         >
           {isBooked ? "Booked" : "Book now"}
         </Button>
