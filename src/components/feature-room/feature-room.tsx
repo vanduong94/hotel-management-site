@@ -57,7 +57,6 @@ const FeatureRoom: FC<Props> = ({ featuredRoom }) => {
           </div>
           <Button
             href={`/rooms/${featuredRoom.slug.current}`}
-            className="border h-fir text-center border-tertiary-dark text-tertiary-dark px-3 py-2 lg:py-5 lg:px-7 rounded-2xl font-bold lg:text-xl"
             buttonType="btn-outline"
           >
             More Details
