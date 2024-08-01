@@ -10,7 +10,7 @@ const Button: FC<ButtonProps> = ({ children, href, buttonType, className, onClic
     return (
       <Link
         href={href}
-        className={className}
+        className={buttonType}
         {...props}
       >
         {children}
@@ -20,7 +20,7 @@ const Button: FC<ButtonProps> = ({ children, href, buttonType, className, onClic
 
   return (
     <button
-      className={className}
+      className={buttonType}
       {...props}
     >
       {children}

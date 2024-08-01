@@ -5,6 +5,6 @@ export type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> &
     href?: string;
     className?: string;
     onClick?: () => void;
-    buttonType: "btn-primary" | "btn-tertiary" | "btn-outline";
+    buttonType: "btn-primary" | "btn-tertiary" | "btn-outline" | "btn-card";
     children: React.ReactNode;
 };
