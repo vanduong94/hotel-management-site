@@ -1,7 +1,7 @@
 "use client";
 
 import { getRoom } from "@/lib/apis";
-import React from "react";
+import React, { useState } from "react";
 import useSWR from "swr";
 import LoadingSpiner from "../../loading";
 import HotelPhotoGallery from "@/components/hotel-photo-gallery";
@@ -9,6 +9,7 @@ import { MdOutlineCleaningServices } from "react-icons/md";
 import { LiaFireExtinguisherSolid } from "react-icons/lia";
 import { AiOutlineMedicineBox } from "react-icons/ai";
 import { GiSmokeBomb } from "react-icons/gi";
+import BookRoomCta from "@/components/book-room-cta";
 
 type Props = {};
 
@@ -16,6 +17,9 @@ const RoomDetails = (props: { params: { slug: string } }) => {
   const {
     params: { slug },
   } = props;
+
+  const [checkinDate, setCheckinDate] = useState<Date | null>(null);
+  const [checkoutDate, setCheckoutDate] = useState<Date | null>(null);
 
   const fetchRoom = () => getRoom(slug);
 
@@ -26,6 +30,19 @@ const RoomDetails = (props: { params: { slug: string } }) => {
     throw new Error("Cannot fetch data");
 
   if (!room) return <LoadingSpiner />;
+
+  const calcMinCheckoutDate = () => {
+    if (checkinDate) {
+      const nextDay = new Date(checkinDate);
+      nextDay.setDate(nextDay.getDate() + 1);
+      return nextDay;
+    }
+
+    return new Date();
+  };
+
+  // console.log("Foobar");
+  // console.log(room);
 
   return (
     <div>
@@ -99,13 +116,22 @@ const RoomDetails = (props: { params: { slug: string } }) => {
                   </div>
                 </div>
               </div>
-
-              {/* Reviews */}
-
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                {/* Reviews */}
+              </div>
             </div>
           </div>
-          <div className="md:col-span-4 rounded-xl shadow-lg dark:shadow dark:shadow-white sticky top-10 h-fit overflow-auto">
-            {/* Book CTA */}
+          <div className="md:col-span-4 rounded-xl shadow-lg dark:shadow dark:shadow-white sticky top-10 h-fit overflow-visible">
+            <BookRoomCta
+              discount={room.discount}
+              price={room.price}
+              specialNote={room.specialNote}
+              checkinDate={checkinDate}
+              setCheckinDate={setCheckinDate}
+              checkoutDate={checkoutDate}
+              setCheckoutDate={setCheckoutDate}
+              calcMinCheckoutDate={calcMinCheckoutDate}
+            />
           </div>
         </div>
       </div>
