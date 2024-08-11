@@ -4,7 +4,7 @@ import { ButtonProps } from "./types";
 
 const Button: FC<ButtonProps> = ({ children, href, buttonType, className, onClick, ...props }) => {
   // const mode = isPrimary ? "btn-primary" : "btn-tertiary";
-  // const combinedClassName = `${mode} ${className || ''}`;
+  // const combinedClassName = `${buttonType} ${className || ''}`;
 
   if (href) {
     return (
