@@ -11,8 +11,6 @@ import { AiOutlineMedicineBox } from "react-icons/ai";
 import { GiSmokeBomb } from "react-icons/gi";
 import BookRoomCta from "@/components/book-room-cta";
 
-type Props = {};
-
 const RoomDetails = (props: { params: { slug: string } }) => {
   const {
     params: { slug },
@@ -20,6 +18,8 @@ const RoomDetails = (props: { params: { slug: string } }) => {
 
   const [checkinDate, setCheckinDate] = useState<Date | null>(null);
   const [checkoutDate, setCheckoutDate] = useState<Date | null>(null);
+  const [adults, setAdults] = useState(1)
+  const [numberOfChildrens, setNumberOfChildrens] = useState(0)
 
   const fetchRoom = () => getRoom(slug);
 
@@ -131,6 +131,10 @@ const RoomDetails = (props: { params: { slug: string } }) => {
               checkoutDate={checkoutDate}
               setCheckoutDate={setCheckoutDate}
               calcMinCheckoutDate={calcMinCheckoutDate}
+              adults={adults}
+              setAdults={setAdults}
+              numberOfChildrens={numberOfChildrens}
+              setNumberOfChildrens={numberOfChildrens}
             />
           </div>
         </div>
