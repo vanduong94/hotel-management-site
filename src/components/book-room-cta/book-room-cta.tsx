@@ -1,19 +1,9 @@
-import React, { Dispatch, FC, SetStateAction } from "react";
+import React from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import { BookRoomCtaProps } from "./types";
 
-type BookRoomCtaProps = {
-  checkinDate: Date | null;
-  setCheckinDate: Dispatch<SetStateAction<Date | null>>;
-  checkoutDate: Date | null;
-  setCheckoutDate: Dispatch<SetStateAction<Date | null>>;
-  price: number;
-  discount: number;
-  specialNote: string;
-  calcMinCheckoutDate: () => Date;
-};
-
-const BookRoomCta: FC<BookRoomCtaProps> = ({
+const BookRoomCta = ({
   price,
   discount,
   specialNote,
@@ -22,7 +12,11 @@ const BookRoomCta: FC<BookRoomCtaProps> = ({
   checkoutDate,
   setCheckoutDate,
   calcMinCheckoutDate,
-}) => {
+  adults,
+  setAdults,
+  numberOfChildrens, 
+  setNumberOfChildrens
+}: BookRoomCtaProps) => {
   const discountPrice = price - (price / 100) * discount;
 
   return (
@@ -78,6 +72,43 @@ const BookRoomCta: FC<BookRoomCtaProps> = ({
             minDate={calcMinCheckoutDate()}
             id="check-out-date"
             className="w-full border text-black border-gray-300 rounded-lg p-2.5 focus:ring-primary focus:border-primary"
+          />
+        </div>
+      </div>
+
+      <div className="flex mt-4">
+        <div className="w-1/2 pr-2">
+          <label
+            htmlFor="adults"
+            className="block text-sm font-medium text-gray-900 dark:text-gray-400"
+          >
+            Adults
+          </label>
+          <input
+            type="number"
+            id="adults"
+            value={adults}
+            onChange={(e) => setAdults(+e.target.value)}
+            min={1}
+            max={5}
+            className="w-full border border-gray-300 rounded-lg p-2.5 text-gray-900"
+          />
+        </div>
+        <div className="w-1/2 pl-2">
+          <label
+            htmlFor="childrens"
+            className="block text-sm font-medium text-gray-900 dark:text-gray-400"
+          >
+            Adults
+          </label>
+          <input
+            type="number"
+            id="childrens"
+            value={numberOfChildrens}
+            onChange={(e) => setNumberOfChildrens(+e.target.value)}
+            min={0}
+            max={3}
+            className="w-full border border-gray-300 rounded-lg p-2.5 text-gray-900"
           />
         </div>
       </div>
