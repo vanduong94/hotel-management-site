@@ -14,10 +14,18 @@ const BookRoomCta = ({
   calcMinCheckoutDate,
   adults,
   setAdults,
-  numberOfChildrens, 
-  setNumberOfChildrens
+  numberOfChildrens,
+  setNumberOfChildrens,
 }: BookRoomCtaProps) => {
   const discountPrice = price - (price / 100) * discount;
+
+  const caclNumberOfDays = () => {
+    if (!checkinDate || !checkoutDate) return 0;
+    const timeDiff = checkoutDate.getTime() - checkinDate.getTime();
+    const numberOfDays = Math.ceil(timeDiff / (24 * 60 * 60 * 1000));
+
+    return numberOfDays;
+  };
 
   return (
     <div className="px-7 py-6">
@@ -99,7 +107,7 @@ const BookRoomCta = ({
             htmlFor="childrens"
             className="block text-sm font-medium text-gray-900 dark:text-gray-400"
           >
-            Adults
+            Children
           </label>
           <input
             type="number"
@@ -112,6 +120,14 @@ const BookRoomCta = ({
           />
         </div>
       </div>
+
+      {caclNumberOfDays() > 0 ? (
+        <p className="mt-3 ">
+          Total Price: $ {caclNumberOfDays() * discountPrice}
+        </p>
+      ) : (
+        <></>
+      )}
     </div>
   );
 };
