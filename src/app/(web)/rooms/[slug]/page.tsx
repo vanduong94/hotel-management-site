@@ -134,7 +134,7 @@ const RoomDetails = (props: { params: { slug: string } }) => {
               adults={adults}
               setAdults={setAdults}
               numberOfChildrens={numberOfChildrens}
-              setNumberOfChildrens={numberOfChildrens}
+              setNumberOfChildrens={setNumberOfChildrens}
             />
           </div>
         </div>
