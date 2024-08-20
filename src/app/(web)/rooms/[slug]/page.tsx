@@ -10,6 +10,7 @@ import { LiaFireExtinguisherSolid } from "react-icons/lia";
 import { AiOutlineMedicineBox } from "react-icons/ai";
 import { GiSmokeBomb } from "react-icons/gi";
 import BookRoomCta from "@/components/book-room-cta";
+import toast from "react-hot-toast";
 
 const RoomDetails = (props: { params: { slug: string } }) => {
   const {
@@ -18,8 +19,8 @@ const RoomDetails = (props: { params: { slug: string } }) => {
 
   const [checkinDate, setCheckinDate] = useState<Date | null>(null);
   const [checkoutDate, setCheckoutDate] = useState<Date | null>(null);
-  const [adults, setAdults] = useState(1)
-  const [numberOfChildrens, setNumberOfChildrens] = useState(0)
+  const [adults, setAdults] = useState(1);
+  const [numberOfChildrens, setNumberOfChildrens] = useState(0);
 
   const fetchRoom = () => getRoom(slug);
 
@@ -39,6 +40,27 @@ const RoomDetails = (props: { params: { slug: string } }) => {
     }
 
     return new Date();
+  };
+
+  const handleBookNowClick = () => {
+    if (!checkinDate || !checkoutDate)
+      return toast.error("Please provide checkin / checkout date");
+
+    if (checkoutDate > checkinDate)
+      return toast.error("Pleae choose a valid checkin peroiod");
+
+    const numberOfDays = calcNumberDays();
+    const hotelRoomSlug = room.slug.current;
+
+    // Intergrate stripe
+  };
+
+  const calcNumberDays = () => {
+    if (!checkinDate || !checkoutDate) return;
+    const timeDiff = checkoutDate.getTime() - checkinDate.getTime();
+    const numberOfDays = Math.ceil(timeDiff / (24 * 60 * 60 * 1000));
+
+    return numberOfDays;
   };
 
   // console.log("Foobar");
@@ -135,6 +157,8 @@ const RoomDetails = (props: { params: { slug: string } }) => {
               setAdults={setAdults}
               numberOfChildrens={numberOfChildrens}
               setNumberOfChildrens={setNumberOfChildrens}
+              isBooked={room.isBooked}
+              handleBookNowClick={handleBookNowClick}
             />
           </div>
         </div>
