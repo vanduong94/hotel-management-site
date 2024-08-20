@@ -13,4 +13,6 @@ export type BookRoomCtaProps = {
   setAdults: Dispatch<React.SetStateAction<number>>;
   numberOfChildrens: number;
   setNumberOfChildrens: Dispatch<React.SetStateAction<number>>;
+  isBooked: boolean;
+  handleBookNowClick: () => void;
 };
