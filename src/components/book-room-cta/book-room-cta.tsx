@@ -16,6 +16,8 @@ const BookRoomCta = ({
   setAdults,
   numberOfChildrens,
   setNumberOfChildrens,
+  isBooked,
+  handleBookNowClick,
 }: BookRoomCtaProps) => {
   const discountPrice = price - (price / 100) * discount;
 
@@ -128,6 +130,14 @@ const BookRoomCta = ({
       ) : (
         <></>
       )}
+
+      <button
+        disabled={isBooked}
+        onClick={handleBookNowClick}
+        className="btn-primary w-full mt-6 disabled:bg-gray-500 disabled:cursor-not-allowed"
+      >
+        {isBooked ? "Booked" : "Book Now"}
+      </button>
     </div>
   );
 };
