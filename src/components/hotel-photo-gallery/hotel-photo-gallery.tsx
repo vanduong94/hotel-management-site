@@ -8,7 +8,7 @@ import { ImagePropType } from "@/models/room";
 import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
 import { MdCancel } from "react-icons/md";
 
-import { MAXIMUM_VISIBLE_PHOTOS } from "@/lib/constants";
+import { MAXIMUM_VISIBLE_PHOTOS } from "@/libs/constants";
 
 const HotelPhotoGallery: FC<{ photos: ImagePropType[] }> = ({ photos }) => {
   const [currentPhotoIndex, setCurrentPhotoIndex] = useState(0);
