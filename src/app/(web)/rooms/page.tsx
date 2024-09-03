@@ -1,6 +1,6 @@
 "use client";
 
-import { getRooms } from "@/lib/apis";
+import { getRooms } from "@/libs/apis";
 import { Room } from "@/models/room";
 import { useSearchParams } from "next/navigation";
 import React, { useEffect, useState } from "react";

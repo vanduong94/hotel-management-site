@@ -1,6 +1,6 @@
 "use client";
 
-import { getRoom } from "@/lib/apis";
+import { getRoom } from "@/libs/apis";
 import React, { useState } from "react";
 import useSWR from "swr";
 import LoadingSpiner from "../../loading";

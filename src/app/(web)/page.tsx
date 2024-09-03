@@ -3,7 +3,7 @@ import PageSearch from "@/components/page-search";
 import Gallery from "@/components/gallery";
 import NewsLetter from "@/components/news-letter";
 import FeatureRoom from "@/components/feature-room";
-import { getFeaturedRoom } from "@/lib/apis";
+import { getFeaturedRoom } from "@/libs/apis";
 
 const Home = async () => {
   const featuredRoom = await getFeaturedRoom();
