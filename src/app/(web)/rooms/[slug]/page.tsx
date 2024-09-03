@@ -45,17 +45,42 @@ const RoomDetails = (props: { params: { slug: string } }) => {
     return new Date();
   };
 
-  const handleBookNowClick = () => {
+  const handleBookNowClick = async () => {
     if (!checkinDate || !checkoutDate)
       return toast.error("Please provide checkin / checkout date");
 
-    if (checkoutDate > checkinDate)
-      return toast.error("Pleae choose a valid checkin peroiod");
+    if (checkinDate > checkoutDate )
+      return toast.error("Please choose a valid checkin peroiod");
 
     const numberOfDays = calcNumberDays();
     const hotelRoomSlug = room.slug.current;
 
+    const stripe = await getStripe();
+
     // Intergrate stripe
+    try {
+      const { data: stripeSession } = await axios.post("/api/stripe", {
+        checkinDate,
+        checkoutDate,
+        adults,
+        children: numberOfChildrens,
+        numberOfDays,
+        hotelRoomSlug,
+      });
+
+      if (stripe) {
+        const result = await stripe.redirectToCheckout({
+          sessionId: stripeSession.id,
+        });
+
+        if (result.error) {
+          toast.error("Payment failed");
+        }
+      }
+    } catch (error) {
+      console.log("Error: ", error);
+      toast.error("An error occured");
+    }
   };
 
   const calcNumberDays = () => {
